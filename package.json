@@ -23,12 +23,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fiizy/fetch.git"
+    "url": "git+https://github.com/Fiizy/fitch.git"
   },
   "bugs": {
-    "url": "https://github.com/Fiizy/fetch/issues"
+    "url": "https://github.com/Fiizy/fitch/issues"
   },
-  "homepage": "https://github.com/Fiizy/fetch#readme",
+  "homepage": "https://github.com/Fiizy/fitch#readme",
   "scripts": {
     "build:types": "tsc -p .",
     "build:js": "webpack --config ./weback.config.js --mode=production --display detailed",
