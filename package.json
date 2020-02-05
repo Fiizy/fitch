@@ -1,0 +1,59 @@
+{
+  "name": "@fiizy/fitch",
+  "version": "1.0.10",
+  "description": "Fiizy fetch wrapper",
+  "keywords": [
+    "fitch",
+    "fetch",
+    "ajax",
+    "request"
+  ],
+  "main": "./dist/fetch.js",
+  "module": "./dist/index.js",
+  "jsnext:main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "author": {
+    "name": "Fiizy",
+    "email": "it@fiizy.com",
+    "url": "https://www.fiizy.com/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fiizy/fetch.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Fiizy/fetch/issues"
+  },
+  "homepage": "https://github.com/Fiizy/fetch#readme",
+  "scripts": {
+    "build:types": "tsc -p .",
+    "build:js": "webpack --config ./weback.config.js --mode=production --display detailed",
+    "build": "npm run remove-dist && npm run build:types && npm run build:js",
+    "remove-dist": "node_modules/.bin/rimraf ./dist"
+  },
+  "devDependencies": {
+    "@babel/core": "7.8.3",
+    "@babel/plugin-proposal-class-properties": "7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "7.8.3",
+    "@babel/preset-env": "7.8.3",
+    "@babel/preset-typescript": "7.8.3",
+    "babel-loader": "8.0.6",
+    "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "fork-ts-checker-webpack-plugin": "4.0.1",
+    "friendly-errors-webpack-plugin": "1.7.0",
+    "terser-webpack-plugin": "2.3.4",
+    "ts-loader": "^6.2.1",
+    "typescript": "3.7.5",
+    "webpack": "4.41.5",
+    "webpack-cli": "3.3.10",
+    "webpackbar": "4.0.0"
+  },
+  "resolutions": {
+    "terser": "3.14.1"
+  }
+}
