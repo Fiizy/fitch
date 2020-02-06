@@ -1,2 +1,2 @@
 export { transformToCamel, transformToSnake } from './helpers/transformers'
-export { Http, HttpOptions, HttpResponse, JsonObject } from './fetch'
+export { Fitch, HttpOptions, HttpResponse, JsonObject } from './fitch'

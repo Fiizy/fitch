@@ -1,6 +1,6 @@
 {
   "name": "@fiizy/fitch",
-  "version": "1.0.10",
+  "version": "1.0.0",
   "description": "Fiizy fetch wrapper",
   "keywords": [
     "fitch",
@@ -8,7 +8,7 @@
     "ajax",
     "request"
   ],
-  "main": "./dist/fetch.js",
+  "main": "./dist/fitch.js",
   "module": "./dist/index.js",
   "jsnext:main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/Fiizy/fitch#readme",
   "scripts": {
+    "lint": "eslint src/**/* --fix",
     "build:types": "tsc -p .",
     "build:js": "webpack --config ./weback.config.js --mode=production --display detailed",
     "build": "npm run remove-dist && npm run build:types && npm run build:js",
@@ -42,10 +43,16 @@
     "@babel/plugin-transform-modules-commonjs": "7.8.3",
     "@babel/preset-env": "7.8.3",
     "@babel/preset-typescript": "7.8.3",
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
     "babel-loader": "8.0.6",
     "case-sensitive-paths-webpack-plugin": "2.3.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
     "fork-ts-checker-webpack-plugin": "4.0.1",
     "friendly-errors-webpack-plugin": "1.7.0",
+    "prettier": "^1.19.1",
     "terser-webpack-plugin": "2.3.4",
     "ts-loader": "^6.2.1",
     "typescript": "3.7.5",

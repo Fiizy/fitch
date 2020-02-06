@@ -1,4 +1,4 @@
-import { HttpResponse, JsonObject } from '../fetch'
+import { HttpResponse, JsonObject } from '../fitch'
 
 const isObject = (value: unknown): value is object => typeof value === 'object' && value !== null
 
@@ -18,7 +18,6 @@ function toSnake(value: string): string {
     return `_${newValue.toLowerCase().replace(/^_/, '')}`
   })
 }
-
 
 function formatObject(o: object | object[], replacer: (s: string) => string): any {
   if (isArray(o)) {
@@ -61,7 +60,4 @@ function transformToCamel<T>(response: HttpResponse<T>) {
   return response
 }
 
-export {
-  transformToCamel,
-  transformToSnake
-}
+export { transformToCamel, transformToSnake }

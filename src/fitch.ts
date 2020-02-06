@@ -12,8 +12,7 @@ export interface JsonObject {
   [k: string]: any
 }
 
-
-export class Http {
+export class Fitch {
   private readonly baseURL: string = ''
   private readonly transformRequest: { (request: JsonObject): JsonObject }[] = []
   private readonly transformResponse: { <T>(request: HttpResponse<T>): HttpResponse<T> }[] = []
