@@ -23,7 +23,7 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: path.join(__dirname, 'dist'),
-    library: '@fiizy/fetch',
+    library: '@fiizy/fitch',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
