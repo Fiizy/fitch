@@ -2,6 +2,7 @@ export interface HttpOptions {
   baseURL?: string
   transformRequest?: { (request: JsonObject): JsonObject }[]
   transformResponse?: { <T>(response: HttpResponse<T>): HttpResponse<T> }[]
+  headers: HeadersInit
 }
 
 export interface HttpResponse<T> extends Response {
@@ -16,19 +17,19 @@ export class Fitch {
   private readonly baseURL: string = ''
   private readonly transformRequest: { (request: JsonObject): JsonObject }[] = []
   private readonly transformResponse: { <T>(request: HttpResponse<T>): HttpResponse<T> }[] = []
+  private readonly headers: HeadersInit
 
   constructor(options?: HttpOptions) {
     if (options && Object.keys(options).length > 0) {
       this.baseURL = options.baseURL || ''
       this.transformRequest = options.transformRequest || []
       this.transformResponse = options.transformResponse || []
+      this.headers = { Accept: 'application/json', 'Content-Type': 'application/json', ...options.headers }
     }
   }
 
   private async http<T>(path: string, args: JsonObject): Promise<T> {
     path = this.baseURL.concat(path)
-
-    args.headers = { Accept: 'application/json', 'Content-Type': 'application/json', ...args.headers }
 
     return new Promise((resolve, reject) => {
       let response: HttpResponse<T>
@@ -39,7 +40,7 @@ export class Fitch {
       const requestArgs: RequestInit = {
         method: args.method,
         body: JSON.stringify(args.body) || null,
-        headers: args.headers
+        headers: this.headers
       }
       requestArgs.credentials = 'include'
       const request = new Request(path, requestArgs)
