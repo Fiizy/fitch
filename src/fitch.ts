@@ -2,7 +2,7 @@ export interface HttpOptions {
   baseURL?: string
   transformRequest?: { (request: JsonObject): JsonObject }[]
   transformResponse?: { <T>(response: HttpResponse<T>): HttpResponse<T> }[]
-  headers: HeadersInit
+  headers?: HeadersInit
 }
 
 export interface HttpResponse<T> extends Response {
@@ -34,13 +34,16 @@ export class Fitch {
     return new Promise((resolve, reject) => {
       let response: HttpResponse<T>
 
+      args.headers = { ...this.headers }
+
       this.transformRequest.forEach((transformer) => {
         args = transformer(args)
       })
+
       const requestArgs: RequestInit = {
         method: args.method,
         body: JSON.stringify(args.body) || null,
-        headers: this.headers
+        headers: args.headers
       }
       requestArgs.credentials = 'include'
       const request = new Request(path, requestArgs)
