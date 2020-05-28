@@ -19,8 +19,12 @@ function toSnake(value: string): string {
   })
 }
 
+function arrayContainsOnlyStrings(array: []): boolean {
+  return array.every((i) => typeof i === 'string')
+}
+
 function formatObject(o: object | object[], replacer: (s: string) => string): any {
-  if (isArray(o)) {
+  if (isArray(o) && !arrayContainsOnlyStrings(o as [])) {
     return o.map((i) => {
       return formatObject(i, replacer)
     })
@@ -50,7 +54,7 @@ function transformToSnake(request: JsonObject): JsonObject {
   return request
 }
 
-function transformToCamel<T>(response: HttpResponse<T>) {
+function transformToCamel<T>(response: HttpResponse<T>): HttpResponse<T> {
   if (response.parsedBody) {
     response.parsedBody = formatObject(response.parsedBody as JsonObject, (s) => {
       return toCamel(s)
