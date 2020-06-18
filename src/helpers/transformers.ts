@@ -19,12 +19,12 @@ function toSnake(value: string): string {
   })
 }
 
-function arrayContainsOnlyStrings(array: []): boolean {
-  return array.every((i) => typeof i === 'string')
+function arrayContainsOnlyStringsOrNumbers(array: []): boolean {
+  return array.every((i) => typeof i === 'string' || typeof i === 'number')
 }
 
 function formatObject(o: object | object[], replacer: (s: string) => string): any {
-  if (isArray(o) && !arrayContainsOnlyStrings(o as [])) {
+  if (isArray(o) && !arrayContainsOnlyStringsOrNumbers(o as [])) {
     return o.map((i) => {
       return formatObject(i, replacer)
     })
