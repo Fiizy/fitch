@@ -42,7 +42,7 @@ module.exports = {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        sourceMap: true
+        parallel: true
       })
     ]
   },
@@ -59,10 +59,6 @@ module.exports = {
   },
 
   plugins: [
-    new WebpackBar(),
-
-    new FriendlyErrorsWebpackPlugin(),
-
     // a plugin that prints an error when you attempt to do this.
     // See https://github.com/facebookincubator/create-react-app/issues/240
     new CaseSensitivePathsPlugin(),

@@ -1,6 +1,7 @@
 # fitch - wrapper for fetch
 
 [![NPM version](https://img.shields.io/npm/v/@fiizy/fitch.svg)](https://www.npmjs.com/package/@fiizy/fitch)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Fiizy/fitch/Publish)
 [![GitHub](https://img.shields.io/github/license/fiizy/fitch)](https://github.com/fiizy/fitch/blob/master/LICENSE)
 ![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/fiizy/fitch)
 [![Minzipped size](https://img.shields.io/bundlephobia/minzip/@fiizy/fitch.svg)](https://www.npmjs.com/package/@fiizy/fitch)
