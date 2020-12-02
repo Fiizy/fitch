@@ -34,5 +34,5 @@ module.exports = {
       impliedStrict: false,
       jsx: false
     }
-  },
+  }
 }
