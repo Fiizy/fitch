@@ -92,4 +92,8 @@ export class Fitch {
   public async put<T>(path: string, body: any): Promise<T> {
     return this.http<T>(path, { method: 'put', body: body })
   }
+
+  public async patch<T>(path: string, body: any): Promise<T> {
+    return this.http<T>(path, { method: 'patch', body: body })
+  }
 }
