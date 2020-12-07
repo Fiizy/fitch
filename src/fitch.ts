@@ -78,22 +78,22 @@ export class Fitch {
   }
 
   public async get<T>(path: string): Promise<T> {
-    return this.http<T>(path, { method: 'get' })
+    return this.http<T>(path, { method: 'GET' })
   }
 
   public async delete<T>(path: string): Promise<T> {
-    return this.http<T>(path, { method: 'delete' })
+    return this.http<T>(path, { method: 'DELETE' })
   }
 
   public async post<T>(path: string, body: any): Promise<T> {
-    return this.http<T>(path, { method: 'post', body: body })
+    return this.http<T>(path, { method: 'POST', body: body })
   }
 
   public async put<T>(path: string, body: any): Promise<T> {
-    return this.http<T>(path, { method: 'put', body: body })
+    return this.http<T>(path, { method: 'PUT', body: body })
   }
 
   public async patch<T>(path: string, body: any): Promise<T> {
-    return this.http<T>(path, { method: 'patch', body: body })
+    return this.http<T>(path, { method: 'PATCH', body: body })
   }
 }
