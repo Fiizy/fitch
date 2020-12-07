@@ -3,8 +3,6 @@
 
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 const path = require('path')
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
-const WebpackBar = require('webpackbar')
 const TerserPlugin = require('terser-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
