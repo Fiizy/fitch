@@ -77,23 +77,23 @@ export class Fitch {
     })
   }
 
-  public async get<T>(path: string, args: JsonObject): Promise<T> {
+  public async get<T>(path: string, args?: JsonObject): Promise<T> {
     return this.http<T>(path, { method: 'GET', ...args })
   }
 
-  public async delete<T>(path: string, args: JsonObject): Promise<T> {
+  public async delete<T>(path: string, args?: JsonObject): Promise<T> {
     return this.http<T>(path, { method: 'DELETE', ...args })
   }
 
-  public async post<T>(path: string, body: any, args: JsonObject): Promise<T> {
+  public async post<T>(path: string, body: any, args?: JsonObject): Promise<T> {
     return this.http<T>(path, { method: 'POST', body: body, headers: { 'Content-Type': 'application/json' }, ...args })
   }
 
-  public async put<T>(path: string, body: any, args: JsonObject): Promise<T> {
+  public async put<T>(path: string, body: any, args?: JsonObject): Promise<T> {
     return this.http<T>(path, { method: 'PUT', body: body, headers: { 'Content-Type': 'application/json' }, ...args })
   }
 
-  public async patch<T>(path: string, body: any, args: JsonObject): Promise<T> {
+  public async patch<T>(path: string, body: any, args?: JsonObject): Promise<T> {
     return this.http<T>(path, { method: 'PATCH', body: body, headers: { 'Content-Type': 'application/json' }, ...args })
   }
 }
