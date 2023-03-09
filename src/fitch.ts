@@ -24,7 +24,7 @@ export class Fitch {
       this.baseURL = options.baseURL || ''
       this.transformRequest = options.transformRequest || []
       this.transformResponse = options.transformResponse || []
-      this.headers = { Accept: 'application/json', 'Content-Type': 'application/json', ...options.headers }
+      this.headers = { Accept: 'application/json', ...options.headers }
     }
   }
 
@@ -34,7 +34,7 @@ export class Fitch {
     return new Promise((resolve, reject) => {
       let response: HttpResponse<T>
 
-      args.headers = { ...this.headers }
+      const headers = { ...this.headers, ...args.headers }
 
       this.transformRequest.forEach((transformer) => {
         args = transformer(args)
@@ -43,7 +43,7 @@ export class Fitch {
       const requestArgs: RequestInit = {
         method: args.method,
         body: JSON.stringify(args.body) || null,
-        headers: args.headers
+        headers: headers
       }
       requestArgs.credentials = 'include'
       const request = new Request(path, requestArgs)
@@ -77,23 +77,23 @@ export class Fitch {
     })
   }
 
-  public async get<T>(path: string): Promise<T> {
-    return this.http<T>(path, { method: 'GET' })
+  public async get<T>(path: string, args: JsonObject): Promise<T> {
+    return this.http<T>(path, { method: 'GET', ...args })
   }
 
-  public async delete<T>(path: string): Promise<T> {
-    return this.http<T>(path, { method: 'DELETE' })
+  public async delete<T>(path: string, args: JsonObject): Promise<T> {
+    return this.http<T>(path, { method: 'DELETE', ...args })
   }
 
-  public async post<T>(path: string, body: any): Promise<T> {
-    return this.http<T>(path, { method: 'POST', body: body })
+  public async post<T>(path: string, body: any, args: JsonObject): Promise<T> {
+    return this.http<T>(path, { method: 'POST', body: body, headers: { 'Content-Type': 'application/json' }, ...args })
   }
 
-  public async put<T>(path: string, body: any): Promise<T> {
-    return this.http<T>(path, { method: 'PUT', body: body })
+  public async put<T>(path: string, body: any, args: JsonObject): Promise<T> {
+    return this.http<T>(path, { method: 'PUT', body: body, headers: { 'Content-Type': 'application/json' }, ...args })
   }
 
-  public async patch<T>(path: string, body: any): Promise<T> {
-    return this.http<T>(path, { method: 'PATCH', body: body })
+  public async patch<T>(path: string, body: any, args: JsonObject): Promise<T> {
+    return this.http<T>(path, { method: 'PATCH', body: body, headers: { 'Content-Type': 'application/json' }, ...args })
   }
 }
