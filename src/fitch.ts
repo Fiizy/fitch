@@ -34,7 +34,7 @@ export class Fitch {
     return new Promise((resolve, reject) => {
       let response: HttpResponse<T>
 
-      const headers = { ...this.headers, ...args.headers }
+      args.headers = { ...this.headers, ...args.headers }
 
       this.transformRequest.forEach((transformer) => {
         args = transformer(args)
@@ -43,7 +43,7 @@ export class Fitch {
       const requestArgs: RequestInit = {
         method: args.method,
         body: JSON.stringify(args.body) || null,
-        headers: headers
+        headers: args.headers
       }
       requestArgs.credentials = 'include'
       const request = new Request(path, requestArgs)
