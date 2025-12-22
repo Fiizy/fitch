@@ -23,20 +23,24 @@ function arrayContainsOnlyStringsOrNumbers(array: []): boolean {
   return array.every((i) => typeof i === 'string' || typeof i === 'number')
 }
 
-function formatObject(o: object | object[], replacer: (s: string) => string): any {
+function formatObject(o: object | object[], path: string, replacer: (s: string) => string, filter?: (k: string, p: string) => boolean): any {
   if (isArray(o) && !arrayContainsOnlyStringsOrNumbers(o as [])) {
-    return o.map((i) => {
-      return formatObject(i, replacer)
+    return o.map((i, idx) => {
+      return formatObject(i, path.concat(`[${idx}]`), replacer, filter)
     })
   } else if (isObject(o)) {
     const n: JsonObject = {}
     const obj: JsonObject = o
 
     Object.keys(obj).forEach((k: string) => {
-      if (isObject(obj[k])) {
-        n[replacer(k)] = formatObject(obj[k], replacer)
+      if (!filter || !filter(k, path.concat(`.${k}`))) {
+        if (isObject(obj[k])) {
+          n[replacer(k)] = formatObject(obj[k], path.concat(`.${k}`), replacer, filter)
+        } else {
+          n[replacer(k)] = obj[k]
+        }
       } else {
-        n[replacer(k)] = obj[k]
+        n[k] = obj[k]
       }
     })
 
@@ -44,21 +48,31 @@ function formatObject(o: object | object[], replacer: (s: string) => string): an
   }
 }
 
-function transformToSnake(request: JsonObject): JsonObject {
+function transformToSnake(request: JsonObject, filter?: (k: string, p: string) => boolean): JsonObject {
   if (request.body) {
-    request.body = formatObject(request.body, (s) => {
-      return toSnake(s)
-    })
+    request.body = formatObject(
+      request.body,
+      'body',
+      (s) => {
+        return toSnake(s)
+      },
+      filter
+    )
   }
 
   return request
 }
 
-function transformToCamel<T>(response: HttpResponse<T>): HttpResponse<T> {
+function transformToCamel<T>(response: HttpResponse<T>, filter?: (k: string, p: string) => boolean): HttpResponse<T> {
   if (response.parsedBody) {
-    response.parsedBody = formatObject(response.parsedBody as JsonObject, (s) => {
-      return toCamel(s)
-    })
+    response.parsedBody = formatObject(
+      response.parsedBody as JsonObject,
+      'body',
+      (s) => {
+        return toCamel(s)
+      },
+      filter
+    )
   }
 
   return response
